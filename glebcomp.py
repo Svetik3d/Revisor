@@ -45,12 +45,12 @@ def check():
             for key in slo["users"]:
                 slo["users"][key][1] = slo["users"][key][0]
             slo["data"] = int(time.time()/(3600*24))
-            log("Изменяем парамаетры всвязи с изменением даты с %s нв %s" %
+            log("Изменяем параметры всвязи с изменением даты с %s нв %s" %
                 (slo["data"], str(int(time.time()/(3600*24)))))
 
         for i in user_cnf:
             slo["users"][i][1] = slo["users"][i][1] - 1
-            log("Поьзователю %s добавили минуту" % i)
+            log("Пользователю %s добавили минуту" % i)
             if slo["users"][i][1] <= 0:
                 retn.append(i)
                 log("У %s кончилось время" % i)
