@@ -17,12 +17,14 @@ def main():
     slo = {}
     popen = subprocess.Popen("/usr/bin/who -u | /bin/grep -v 'pts/' | /usr/bin/awk '{print $1,$6}'", shell=True, stdout=subprocess.PIPE)
     stdout, _ = popen.communicate()
+    popen.wait()
     stdout = stdout.split("\n")
-    for i in stdout:
-        part = i.split(" ")
-        if part == [""]:
-            break
-        slo[part[0]] = part[1]
+    for line in stdout:
+        line = line.strip()
+        if not line:
+           continue
+        user, pid = line.split(" ")
+        slo[user] = pid
     payload = ",".join(slo.keys())
     try:
         rget = requests.get("http://%s/check?users=%s" % (IP, payload))
