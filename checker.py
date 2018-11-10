@@ -33,8 +33,9 @@ def main():
         log("Error get from server: %s" % str(err))
     for i in slo.keys():
         if i in users:
-            #subprocess.call("kill %s" % (str(slo[i])), shell=True)
-            log("kill %s" % (str(slo[i])))
+            log("kill %s with %s" % (str(i), str(slo[i])))
+            subprocess.call("kill %s" % (str(slo[i])), shell=True)
+            
 
 if __name__ == '__main__':
     main()
